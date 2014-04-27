@@ -1,0 +1,13 @@
+{
+	"members": [
+		<%=
+			@members.map do |member|
+			{
+				id: member.id,
+				prenom: member.prenom,
+				nom: member.nom
+			}.to_json
+			end.join(',')
+		%>
+	]
+}

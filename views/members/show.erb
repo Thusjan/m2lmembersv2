@@ -1,0 +1,30 @@
+<div id="ici">
+  Ici, Mustache va placer la vue du
+  membre #<span id="member_id"><%= @member_id %></span>
+</div>
+
+<script id="elem_html" type="text/template">
+  <h1>Liste des membres #{{id}}</h1>
+
+  ID : <span id="member_id">{{id}}</span>
+  Nom et prénom : {{nom}} {{prenom}}
+  date de naissance: {{datenaiss}}
+
+    Pour modifier le membre, cliquez ici :
+  <a href="/members/{{id}}/edit">Modifier</a>  
+
+       Pour le supprimer, cliquez ici :
+  <a href="/members/{{ id }}/destroy">Supprimer</a>  
+  <hr>
+</script>
+
+<script>
+$( document ).ready(function() {
+  var member_id = $('#member_id').html();
+$.getJSON("/members/" + member_id + ".json", function(data){
+    var template = $("#elem_html").html();
+    var html = Mustache.to_html(template, data);
+    $("#ici").html(html);
+  });
+});
+</script>
